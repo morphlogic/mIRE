@@ -18,5 +18,6 @@ while (true)
 
     await hypervisor.Accept(new ClientHandler(client));
 
-    client.Close();
+    //  TODO:   remove below vestige; it's a reminder that we need to close the client in the Handler (or Hypervisor)
+    //client.Close();
 }

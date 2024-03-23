@@ -4,6 +4,8 @@ namespace mIRE.Server.Console
 {
     internal class ClientHandler
     {
+        public uint ClientId { get; set; }
+
         private readonly TcpClient _client;
         private readonly NetworkStream _stream;
 
@@ -12,29 +14,42 @@ namespace mIRE.Server.Console
 
         internal ClientHandler(TcpClient client)
         {
+            ClientId = 0;
+
             _client = client;
             _stream = _client.GetStream();
+        }
+
+        internal void Initialize(uint clientId)
+        {
+            ClientId = clientId;
         }
 
         internal async Task InitiateUserExchange()
         {
             _stream.Send($"Welcome to mIRE!{Environment.NewLine}");
 
-            //  TODO:   login/(register+chargen)
-            int i;
-
-            while ((i = await _stream.ReadAsync(_bytes)) != 0)
+            _ = Task.Run(async () =>
             {
-                _text = _bytes.ToString(i);
+                //  TODO:   login/(register+chargen)            
 
-                System.Console.WriteLine($"Received:  {_text}");
+                int i;
 
-                _text = _text.ToUpper();
+                while ((i = await _stream.ReadAsync(_bytes)) != 0)
+                {
+                    _text = _bytes.ToString(i);
 
-                _stream.Send(_text);
+                    System.Console.WriteLine($"Received [{ClientId}]:  {_text}");
 
-                System.Console.WriteLine($"Sent:  {_text}");
-            }
+                    _text = _text.ToUpper();
+
+                    _stream.Send(_text);
+
+                    System.Console.WriteLine($"Sent:  {_text}");
+                }
+
+                _stream.Close();
+            });            
         }
     }
 }
