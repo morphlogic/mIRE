@@ -1,31 +1,32 @@
 ﻿using System.Net.Sockets;
 
-namespace mIRE.Server.Console
+namespace mIRE.Server.Core
 {
-    internal class ClientHandler
+    internal class ClientHandler : IClientHandler
     {
         public uint ClientId { get; set; }
 
-        private readonly TcpClient _client;
-        private readonly NetworkStream _stream;
+        private TcpClient _client;
+        private NetworkStream _stream;
 
         private byte[] _bytes = new byte[256];
         private string _text = string.Empty;
 
-        internal ClientHandler(TcpClient client)
+        //  TODO:   internal ?
+        public ClientHandler()
         {
-            ClientId = 0;
+            ClientId = 0;          
+        }
 
+        public void Initialize(TcpClient client, uint clientId)
+        {
+            ClientId = clientId;
+         
             _client = client;
             _stream = _client.GetStream();
         }
 
-        internal void Initialize(uint clientId)
-        {
-            ClientId = clientId;
-        }
-
-        internal async Task InitiateUserExchange()
+        public async Task InitiateUserExchange()
         {
             _stream.Send($"Welcome to mIRE!{Environment.NewLine}");
 
@@ -39,17 +40,17 @@ namespace mIRE.Server.Console
                 {
                     _text = _bytes.ToString(i);
 
-                    System.Console.WriteLine($"Received [{ClientId}]:  {_text}");
+                    Console.WriteLine($"Received [{ClientId}]:  {_text}");
 
                     _text = _text.ToUpper();
 
                     _stream.Send(_text);
 
-                    System.Console.WriteLine($"Sent:  {_text}");
+                    Console.WriteLine($"Sent:  {_text}");
                 }
 
                 _stream.Close();
-            });            
+            });
         }
     }
 }

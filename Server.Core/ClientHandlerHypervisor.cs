@@ -1,18 +1,21 @@
-﻿namespace mIRE.Server.Console
+﻿using System.Net.Sockets;
+
+namespace mIRE.Server.Core
 {
-    internal class ClientHandlerHypervisor
+    internal class ClientHandlerHypervisor : IClientHandlerHypervisor
     {
-        private List<ClientHandler> _clientHandlers = new();
+        private List<IClientHandler> _clientHandlers = new();
         private HashSet<uint> _clientIds = new();
         private uint _nextClientId = 1;
 
         private SemaphoreSlim _clientIdsLock = new(1, 1);
 
-        internal ClientHandlerHypervisor()
+        //  TODO:   internal ?
+        public ClientHandlerHypervisor()
         {
         }
 
-        internal async Task Accept(ClientHandler handler)
+        public async Task Accept(IClientHandler handler, TcpClient client)
         {
             //  TODO:   timeout ?
             //  lock start
@@ -22,7 +25,7 @@
             {
                 _nextClientId++;
 
-                if(_nextClientId == 0)  //  Default client id is 0; should not initialize any client with 0
+                if (_nextClientId == 0)  //  Default client id is 0; should not initialize any client with 0
                 {
                     _nextClientId = 1;
                 }
@@ -30,7 +33,7 @@
 
             _clientIds.Add(_nextClientId);
 
-            handler.Initialize(_nextClientId);
+            handler.Initialize(client, _nextClientId);
 
             _clientIdsLock.Release();
 

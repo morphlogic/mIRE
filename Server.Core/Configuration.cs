@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mIRE.Server.Console
+namespace mIRE.Server.Core
 {
     //  TODO:   Read these from configuration
     //  TODO:   Change naming convention rule for internal members in "FxCop" / R#

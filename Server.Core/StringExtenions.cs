@@ -1,4 +1,4 @@
-﻿namespace mIRE.Server.Console
+﻿namespace mIRE.Server.Core
 {
     internal static class StringExtenions
     {
