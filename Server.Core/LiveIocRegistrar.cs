@@ -10,7 +10,7 @@ namespace mIRE.Server.Core
         {
             Container = new Container();
 
-            Container.Register<IClientHandlerHypervisor, ClientHandlerHypervisor>();
+            Container.Register<IClientHandlerHypervisor, ClientHandlerHypervisor>(Reuse.Singleton);
             Container.Register<IClientHandler, ClientHandler>();
         }
     }

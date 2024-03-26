@@ -2,13 +2,6 @@
 using Microsoft.Extensions.Logging;
 using mIRE.Server.Core;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace mIRE.Server.Console
 {
@@ -35,9 +28,7 @@ namespace mIRE.Server.Console
                     //  inject based on assembly? named scope?
                     Microsoft.Extensions.Logging.ILogger microsoftLogger = loggerFactory.CreateLogger("Server.Console");
 
-                    var container = LiveIocRegistrar.Container;
-
-                    container.RegisterInstance(microsoftLogger);
+                    LiveIocRegistrar.Container.RegisterInstance(microsoftLogger);                    
 
                     _isInitialized = true;
                 }

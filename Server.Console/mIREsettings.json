@@ -1,12 +1,21 @@
 {
-  "exclude": [
-    "**/bin",
-    "**/bower_components",
-    "**/jspm_packages",
-    "**/node_modules",
-    "**/obj",
-    "**/platforms"
-  ],
+  //"exclude": [
+  //  "**/bin",
+  //  "**/bower_components",
+  //  "**/jspm_packages",
+  //  "**/node_modules",
+  //  "**/obj",
+  //  "**/platforms"
+  //],
+  "ConnectionStrings": {
+    "dbConnection": "data source=localhost"
+  },
+  "environment": "local",
+  "Logging": {
+    "LogLevel": {
+      "Default": "Verbose"
+    }
+  },
   "Server": {
     "Host": "",
     "Port": 1111
