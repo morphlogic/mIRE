@@ -1,4 +1,5 @@
-﻿using System.Net.Sockets;
+﻿using Microsoft.Extensions.Logging;
+using System.Net.Sockets;
 
 namespace mIRE.Server.Core
 {
@@ -11,11 +12,12 @@ namespace mIRE.Server.Core
 
         private byte[] _bytes = new byte[256];
         private string _text = string.Empty;
-
-        //  TODO:   internal ?
-        public ClientHandler()
+        private readonly ILogger _logger;
+        
+        public ClientHandler(ILogger logger)
         {
-            ClientId = 0;          
+            ClientId = 0;
+            _logger = logger;
         }
 
         public void Initialize(TcpClient client, uint clientId)
@@ -40,13 +42,13 @@ namespace mIRE.Server.Core
                 {
                     _text = _bytes.ToString(i);
 
-                    Console.WriteLine($"Received [{ClientId}]:  {_text}");
+                    _logger.LogInformation("Received [{ClientId}]:  {_text}", ClientId, _text);
 
                     _text = _text.ToUpper();
 
                     _stream.Send(_text);
 
-                    Console.WriteLine($"Sent:  {_text}");
+                    _logger.LogInformation("Sent:  {_text}", _text);
                 }
 
                 _stream.Close();

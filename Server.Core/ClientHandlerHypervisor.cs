@@ -1,18 +1,20 @@
-﻿using System.Net.Sockets;
+﻿using Microsoft.Extensions.Logging;
+using System.Net.Sockets;
 
 namespace mIRE.Server.Core
 {
     internal class ClientHandlerHypervisor : IClientHandlerHypervisor
     {
+        private readonly ILogger _logger;
         private List<IClientHandler> _clientHandlers = new();
         private HashSet<uint> _clientIds = new();
         private uint _nextClientId = 1;
 
         private SemaphoreSlim _clientIdsLock = new(1, 1);
 
-        //  TODO:   internal ?
-        public ClientHandlerHypervisor()
+        public ClientHandlerHypervisor(ILogger logger)
         {
+            _logger = logger;
         }
 
         public async Task Accept(IClientHandler handler, TcpClient client)
@@ -32,6 +34,8 @@ namespace mIRE.Server.Core
             }
 
             _clientIds.Add(_nextClientId);
+
+            _logger.LogInformation("Initializing ClientHandler with ID:  {_nextClientId}", _nextClientId);
 
             handler.Initialize(client, _nextClientId);
 
