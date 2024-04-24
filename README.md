@@ -4,7 +4,7 @@ Let yourself go, get sucked into a mIRE, and become someone else! Let your alter
 
 ## Summary
 
-A mIRE instance is intended to function similarly as a MUD (Multi-User Dimension)/MOO (MUD:  Object-Oriented), in that its users are able to achieve a (mostly) complete user experience armed with nothing more than a telnet client.
+A mIRE instance is intended to function similarly as a MUD (Multi-User Dimension)/MOO (MUD:  Object-Oriented), in that its users are able to achieve a (mostly) complete user experience armed with nothing more than a text-based telnet client.
 
 While logged into the real-time system, users can, as in most MUDs/MOOs:
 
@@ -35,3 +35,7 @@ While logged into the real-time system, users can, as in most MUDs/MOOs:
 ## What makes mIRE different than a MUD/MOO?
 
 mIRE puts an emphasis on world-building - not just by immortals or implementors, though, but by players themselves!
+
+[mechs - characters controlled primarily by mechanical constituents of the mIRE ]
+
+[mycelial structure - world architecture allows the world to grow organically over time; dream/cells/hypha(connections); dreams can contain hundreds of cells or just a single one; exit:entrance ratio]
