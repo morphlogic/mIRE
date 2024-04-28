@@ -8,4 +8,22 @@
     <RootNamespace>mIRE.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="SandboxWorld\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="YamlDotNet" Version="15.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\World.Domain\World.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SandboxWorld\X0.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

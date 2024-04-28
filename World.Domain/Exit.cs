@@ -9,6 +9,8 @@
 
         public int Distance { get; set; } = 0;
 
+        public string CellKey { get; set; } = string.Empty;
+
         public Cell Cell { get; set; } = new Cell();
     }
 }

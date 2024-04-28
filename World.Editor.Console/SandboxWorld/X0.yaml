@@ -1,0 +1,138 @@
+---
+key: x0
+short-name: Existence level 0
+full-name: Level 0 of existence
+dreamer: system
+description: The bedrock dream for the sandbox world. It is the only dream without entry points.
+things:
+  -
+    key: t0
+    keywords:
+      - t0
+    name: Thing 0
+    description: The first thing in existence level 0.
+    thing-keys: []
+  -
+    key: t1
+    keywords:
+      - t1
+      - thing1
+      - second
+    name: Thing 1
+    description: The second thing in existence level 1.
+    thing-keys:
+      - t2
+  -
+    key: t2
+    keywords:
+      - t2
+      - thing2
+      - third
+    name: Thing 2
+    description: The third thing in existence level 2.
+    thing-keys: []
+mechs:
+  -
+    key: m0
+    keywords:
+      - m0
+    name: Mech 0
+    description: The first mechanical character in existence level 0 is here.
+    thing-keys: []
+  -
+    key: m1
+    keywords:
+      - m1
+      - mech1
+      - second
+    name: Mech 1
+    description: The second mechanical character in existence level 0 standss here.
+    thing-keys:
+      - t0
+  -
+    key: m2
+    keywords:
+      - m2
+      - mech2
+      - third
+    name: Mech 2
+    description: The third mechanical character in Existence level rests here.
+    thing-keys:
+      - t1
+      - t2
+cells:
+  -
+    key: c0
+    short-name: Cell 0
+    full-name: The first cell
+    description: You are in the first cell of existence level 0. You see only one way forward.
+    thing-keys: []
+    mech-keys: []
+    exits:
+      -
+        key: forward
+        description: A passage straight to the next cell.
+        distance: 0
+        cell-key: c1
+  -
+    key: c1
+    short-name: Cell 1
+    full-name: The second cell
+    description: You are in the second cell of existence level 0. There are two ways forward and one way backward.
+    thing-keys:
+      - t0
+    mech-keys:
+      - m0
+    exits:
+      -
+        key: backward
+        description: A passage back to the first cell.
+        distance: 0
+        cell-key: c0
+      -
+        key: left
+        description: A passage to the left leads to another cell.
+        distance: 1
+        cell-key: c2
+      -
+        key: right
+        description: a passage to the right leads to another cell.
+        distance: 5
+        cell-key: c3
+  -
+    key: c2
+    short-name: Cell 2
+    full-name: The third cell
+    description: You are in the third cell of existence level 0. There is one way backward.
+    thing-keys:
+        - t1
+    mech-keys:
+        - m1
+    exits:
+        -
+          key: backward
+          description: A passage leads back to the second cell.
+          distance: 2
+          cell-key: c1
+  -
+      key: c3
+      short-name: Cell 3
+      full-name: the fourth cell
+      description: You are in the fourth cell of existence level 0. There is one way forward and one way backward.
+      thing-keys:
+          - t0
+          - t2
+      mech-keys:
+          - m0
+          - m2
+      exits:
+          -
+            key: forward
+            description: A passage leads forward to the third cell.
+            distance: 0
+            cell-key: c2
+          -
+            key: backward
+            description: A pasasge leads backward to the second cell.
+            distance: 0
+            cell-key: c1

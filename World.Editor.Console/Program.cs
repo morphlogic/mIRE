@@ -1,5 +1,9 @@
-﻿var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+﻿using mIRE.World.Editor.Console;
+
+var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 var assemblyVersionInfo = System.Diagnostics.FileVersionInfo.GetVersionInfo(assembly.Location);
+
+var commandProcessor = new CommandProcessor();
 
 Console.WriteLine($@"
 *** mIRE Console World Editor ***
@@ -15,6 +19,13 @@ while (!exitConfirmed)
 {
     while (input != null && !input.StartsWith("exit"))
     {
+        var command = commandProcessor.Parse(input);
+
+        if (command != null)
+        {
+            command.Execute();
+        }
+
         Console.Write($"> ");
 
         input = Console.ReadLine();
@@ -41,7 +52,9 @@ while (!exitConfirmed)
         input = string.Empty;
 
         Console.WriteLine(Environment.NewLine);
-    }
+    }    
+
+    //if()
 
     //  parse command
 }
